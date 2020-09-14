@@ -1,0 +1,32 @@
+﻿<mui:ModernWindow x:Class="bms.startup.Windows.AddBMUForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource BlankWindow}"
+        ResizeMode="NoResize"
+        LogoData="M12.126984,0L19.872009,0 19.872009,12.128 32,12.128 32,19.872999 19.872009,19.872999 19.872009,31.999 12.126984,31.999 12.126984,19.872999 0,19.872999 0,12.128 12.126984,12.128z"
+        Height="480" Width="640">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="10">
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock Text="使能BMS：" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                <CheckBox></CheckBox>
+                <TextBlock Text="从机数：" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                <TextBox x:Name="bmu" Width="80" Text="4"></TextBox>
+                <!--<Button x:Name="createbmu" Content="添加" Margin="5,0,0,0" Click="createbmu_Click" Style="{DynamicResource ButtonStyle1}" Width="50"></Button>
+                <Button x:Name="deletebmu" Content="删除" Margin="5,0,0,0" Click="deletebmu_Click" Style="{DynamicResource ButtonStyle1}" Width="50"></Button>
+                <Button x:Name="savebmu" Content="确定" Margin="5,0,0,0" Click="savebmu_Click" Style="{DynamicResource ButtonStyle1}" Width="50" ></Button>-->
+            </StackPanel>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1" Margin="5">
+            <StackPanel x:Name="sp"  ></StackPanel>
+        </ScrollViewer>
+    </Grid>
+</mui:ModernWindow>

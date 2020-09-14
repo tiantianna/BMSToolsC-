@@ -1,0 +1,335 @@
+﻿<mui:ModernWindow x:Class="bms.startup.Gen2MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
+        WindowStartupLocation="CenterScreen"
+        Icon="GXlogo2.ico"
+        WindowState="Maximized"
+        Style="{StaticResource BlankWindow}"
+        Title="HC221.0.0.20200316R"
+        LogoData="F1M59,1C82.109,0.592 131.703,43.981 125,71 121.558,84.874 77.578,126.525 55,122 54.667,121.333 54.333,120.667 54,120 58.921,103.848 97.031,74.05 100,61 99,61 98,61 97,61 90.132,65.02 44.702,84 43,88 43.667,88 44.333,88 45,88 53.175,90.684 57.496,83.374 66,85 66,86.333 66,87.667 66,89 59.699,96.661 54.079,104.134 46,110 44.667,110 43.333,110 42,110 36.632,106.36 33.25,101.709 29,97 28.366,72.076 53.191,15.953 81,28 86.175,30.045 88.245,32.432 89,39 84.447,43.534 81.921,43.13 75,46 76.632,48.557 76.232,48.424 79,50 82.333,50 85.667,50 89,50 91.666,47.667 94.334,45.333 97,43 97.635,28.663 93.71,21.758 84,18 50.145,8.821 26.208,37.04 14,54 9.973,59.595 9.672,65.9 3,69 3,65.334 3,61.666 3,58 11.535,35.345 38.89,12.686 59,1z" 
+        Width="720" Height="480">
+
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBox}" x:Key="data">
+            <Setter Property="Width" Value="70"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="IsEnabled" Value="False"/>
+        </Style>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="Width" Value="140"/>
+            <!--<Setter Property="Width" Value="150"/>-->
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="HorizontalContentAlignment" Value="Right"></Setter>
+        </Style>
+
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="500"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="5,5,5.333,5.333">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{DynamicResource sbsyh}" VerticalAlignment="Center" Style="{StaticResource MyStyle}" Width="160"></TextBlock>
+                    <ComboBox Width="100" ItemsSource="{Binding CanIndexList}" SelectedIndex="{Binding SelectDeviceIndex}"/>
+                    <TextBlock  Text="{DynamicResource cantongdao}" VerticalAlignment="Center" Margin="20,0,0,0" Style="{StaticResource MyStyle}" Width="100"></TextBlock>
+                    <ComboBox Width="100" ItemsSource="{Binding CanChannelList}" SelectedIndex="{Binding SelectCanChannelIndex}"/>
+                    <TextBlock Text="{DynamicResource baudrate}" Margin="20,0,0,0" VerticalAlignment="Center"  Style="{StaticResource MyStyle}" Width="85"></TextBlock>
+                    <ComboBox Width="100" ItemsSource="{Binding CanBaudRateList}" SelectedIndex="{Binding SelectRate}"  DisplayMemberPath="Baudratename"/>
+                    <Button x:Name="CanConnectBtn"  Content="{DynamicResource connect}" Margin="20,0,0,0" Width="85" Command="{Binding ConnectCanCommand}"  CommandParameter="{Binding ElementName=CanConnectBtn}" Style="{DynamicResource ButtonStyle1}" />
+                    <Button Content="{DynamicResource zhuxiao}" Margin="10,0,0,0" Width="60" Command="{Binding LogoutCommand}" Style="{DynamicResource ButtonStyle1}" />
+                    <ComboBox x:Name="cbLang" Margin="10,0,0,0"  Width="120" ItemsSource="{Binding CategoryI18nList}" DisplayMemberPath="Name" SelectedIndex="{Binding SelectI18n}" >
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding CbI18nClickCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
+                    <!--<Button x:Name="m_HelpButton" IsEnabled="True" Width="23" Height="23" Command="{Binding UserCommand}" Margin="15,0,0,0" ToolTip="用户管理" Visibility="{Binding ButtonVisible}">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Grid>
+                                    <Ellipse>
+                                        <Ellipse.Stroke>
+                                            <SolidColorBrush x:Name="m_Stroke" Color="Silver" />
+                                        </Ellipse.Stroke>
+                                        <Ellipse.Fill>
+                                            <SolidColorBrush x:Name="m_Back" Color="White" />
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+                                    <Image Margin="2" Source="Images/user.png" />
+                                </Grid>
+
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>-->
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="5,5,5.333,5.333" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <StackPanel Orientation="Horizontal">
+                <TextBox Width="50" Margin="5,0,5,0" Text="{Binding SlaveId}"/>
+                <Button  Content="{DynamicResource getSlaveNum}" Command="{Binding RunFun}" Background="#5bc0de" CommandParameter="0"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2" Margin="5,5,5.333,5.333" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+            <TabControl SelectedIndex="0">
+                <TabItem Header="{DynamicResource shishi}" Style="{DynamicResource ModelTabItemStyle}"  Visibility="{Binding Itemlist[0]}" >
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto">
+
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel HorizontalAlignment="Left">
+                                <Button Command="{Binding RunFun}" Content="{DynamicResource startshishi}" Background="#5bc0de"  Margin="3" x:Name="shishi" CommandParameter="1"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="{DynamicResource slaveVersion}" VerticalAlignment="Center" Margin="1" Width="170" />
+                                <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.SlaveVersion}" Width="250"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="{DynamicResource bcnt}" VerticalAlignment="Center" Margin="1" Width="190" />
+                                <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.BCNT}" Width="120"/>
+                                <Label Content="SOC：" VerticalAlignment="Center" Margin="1"  Width="190"/>
+                                <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.SOC}" Width="120"/>
+                                <Label Content="{DynamicResource VTOTAL}" VerticalAlignment="Center" Margin="1" Width="190" />
+                                <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.VTotal}" Width="120"/>
+                                <Label Content="{DynamicResource CVMAX}" VerticalAlignment="Center" Margin="1"  Width="190"/>
+                                <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.CVMax}" Width="120"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="{DynamicResource CVMIN}" VerticalAlignment="Center" Margin="1" Width="190" />
+                                <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.CVmin}" Width="120"/>
+
+                                <Label Content="{DynamicResource batstatus}" VerticalAlignment="Center" Margin="1"  Width="190"/>
+                                <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.CellInfo}" Width="120"/>
+
+                                <Label Content="{DynamicResource temstatus}" VerticalAlignment="Center" Margin="1"  Width="190"/>
+                                <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.TemInfo}" Width="120"/>
+                                <Label Content="{DynamicResource hardwarefault}" VerticalAlignment="Center" Margin="1" Width="190" />
+                                <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.BmuHardwareFault}" Width="120"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="{DynamicResource signallinestatus}" VerticalAlignment="Center" Margin="1" Width="190" />
+                                <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.SignalInfo}" Width="120"/>
+                                <Label Content="{DynamicResource jhstatus}" VerticalAlignment="Center" Margin="1" Width="190" />
+                                <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.BalanceInfo}" Width="120"/>
+
+                                <Label Content="{DynamicResource packMaxTem}" VerticalAlignment="Center" Margin="1"  Width="190"/>
+                                <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.PacMaxTemp}" Width="120"/>
+                                <Label Content="{DynamicResource packMinTem}" VerticalAlignment="Center" Margin="1"  Width="190"/>
+                                <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.PacMinTemp}" Width="120"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <Rectangle Fill="#5bc0de" VerticalAlignment="Top" Height="1" Margin="10,3,10,3"/>
+                            </StackPanel>
+                            <StackPanel HorizontalAlignment="Left">
+                                <Label Content="{DynamicResource cellvoltage}" VerticalAlignment="Center" Margin="1"/>
+                            </StackPanel>
+                            <!--单体电压，代码生产布局-->
+                            <StackPanel Orientation="Vertical" x:Name="cellVol"/>
+                            <StackPanel>
+                                <Rectangle Fill="#5bc0de" VerticalAlignment="Top" Height="1" Margin="3"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="T1：" VerticalAlignment="Center" Margin="1"  />
+                                <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.TemSensor[0]}"/>
+                                <Label Content="T2：" VerticalAlignment="Center" Margin="1"  />
+                                <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.TemSensor[1]}"/>
+                                <Label Content="T3：" VerticalAlignment="Center" Margin="1"  />
+                                <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.TemSensor[2]}"/>
+                                <Label Content="T4：" VerticalAlignment="Center" Margin="1"  />
+                                <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.TemSensor[3]}"/>
+                                <Label Content="T5：" VerticalAlignment="Center" Margin="1"  />
+                                <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.TemSensor[4]}"/>
+                                <Label Content="T6：" VerticalAlignment="Center" Margin="1"  />
+                                <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.TemSensor[5]}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="T7：" VerticalAlignment="Center" Margin="1"  />
+                                <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.TemSensor[6]}"/>
+                                <Label Content="T8：" VerticalAlignment="Center" Margin="1"  />
+                                <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.TemSensor[7]}"/>
+                                <Label Content="T9：" VerticalAlignment="Center" Margin="1"  />
+                                <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.TemSensor[8]}"/>
+                                <Label Content="T10：" VerticalAlignment="Center" Margin="1"  />
+                                <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.TemSensor[9]}"/>
+                                <Label Content="Tb：" VerticalAlignment="Center" Margin="1"  />
+                                <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.Tb}"/>
+                                <Label Content="CANLIFE：" VerticalAlignment="Center" Margin="1"  />
+                                <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.Can_life}"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <Rectangle Fill="#5bc0de" VerticalAlignment="Top" Height="1" Margin="3"/>
+                            </StackPanel>
+                            <StackPanel HorizontalAlignment="Left">
+                                <Label Content="{DynamicResource cjxconnectstatuc}" VerticalAlignment="Center" Margin="1" Width="300" HorizontalContentAlignment="Left"/>
+                            </StackPanel>
+                            <!--信号采集线连接状态，代码自动生成-->
+                            <StackPanel Orientation="Vertical" x:Name="signalConnect"/>
+                            <!--<StackPanel>
+                                <Rectangle Fill="#5bc0de" VerticalAlignment="Top" Height="1" Margin="3"/>
+                            </StackPanel>
+                            -->
+                            <!--电池均衡状态，代码生成-->
+                            <!--
+                            <StackPanel HorizontalAlignment="Left">
+                                <Label Content="{DynamicResource jhstatus}" VerticalAlignment="Center" Margin="1"/>                                
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" x:Name="balance"/>-->
+
+                        </StackPanel>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="{DynamicResource peizhiinfo}" Style="{DynamicResource ModelTabItemStyle}" Visibility="{Binding Itemlist[1]}">
+                    <StackPanel Orientation="Vertical">
+
+                        <!--读取配置-->
+                        <GroupBox Header="{DynamicResource readconfig}" Padding="0,5,0,0" Margin="3" Visibility="{Binding Itemlist[2]}">
+                            <!--<ScrollViewer HorizontalScrollBarVisibility="Auto">-->
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                <StackPanel Orientation="Vertical">
+
+                                    <StackPanel HorizontalAlignment="Left">
+                                        <Button Command="{Binding RunFun}" Content="{DynamicResource readconfig}" Background="#5bc0de"  Margin="3" CommandParameter="2"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="SID：" VerticalAlignment="Center" Margin="1"  />
+                                        <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.Sid}"/>
+
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="{DynamicResource bcnt}" VerticalAlignment="Center" Margin="1"  />
+                                        <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.Bcnt_2}"/>
+                                        <Label Content="{DynamicResource BCNT_A}" VerticalAlignment="Center" Margin="1"  />
+                                        <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.Bcnt_A}"/>
+                                        <Label Content="{DynamicResource BCNT_B}" VerticalAlignment="Center" Margin="1"  />
+                                        <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.Bcnt_B}"/>
+                                        <Label Content="{DynamicResource BCNT_C}" VerticalAlignment="Center" Margin="1"  />
+                                        <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.Bcnt_C}"/>
+                                        <Label Content="{DynamicResource BCNT_D}" VerticalAlignment="Center" Margin="1"  />
+                                        <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.Bcnt_D}"/>
+                                        <Label Content="{DynamicResource BCNT_E}" VerticalAlignment="Center" Margin="1"  />
+                                        <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.Bcnt_E}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="{DynamicResource BCNT_F}" VerticalAlignment="Center" Margin="1"  />
+                                        <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.Bcnt_F}"/>
+                                        <Label Content="{DynamicResource maxChargeCur}" VerticalAlignment="Center" Margin="1"  />
+                                        <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.MaxChargeCur}"/>
+                                        <Label Content="{DynamicResource COVTH}" VerticalAlignment="Center" Margin="1"  />
+                                        <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.Covth}"/>
+                                        <Label Content="{DynamicResource CUVTH}" VerticalAlignment="Center" Margin="1"  />
+                                        <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.Cuvth}"/>
+                                        <Label Content="{DynamicResource FOTH}" VerticalAlignment="Center" Margin="1"  />
+                                        <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.Foth}"/>
+                                        <Label Content="{DynamicResource FCTH}" VerticalAlignment="Center" Margin="1"  />
+                                        <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.Fcth}"/>
+                                    </StackPanel>
+
+                                </StackPanel>
+
+                            </ScrollViewer>
+                        </GroupBox>
+                        <!--配置-->
+
+                        <GroupBox Header="{DynamicResource config}" Padding="0,5,0,0" Margin="3" Height="250" HorizontalAlignment="Stretch" Visibility="{Binding Itemlist[3]}">
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,30" VerticalAlignment="Top">
+                                        <Button  Content="{DynamicResource readconfig}"  Background="#5bc0de"  Margin="0,10,5,0" Command="{Binding RunFun}" CommandParameter="10"/>
+                                        <Button  Content="{DynamicResource saveconfig}" Background="#5bc0de"  Margin="0,10,5,0" Command="{Binding RunFun}" CommandParameter="11"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="{DynamicResource sid10}" VerticalAlignment="Center" Margin="1"  />
+                                        <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveConfig.Sid}" IsEnabled="True"/>
+                                        <Label Content="{DynamicResource COVTHmV}" VerticalAlignment="Center" Margin="1"  />
+                                        <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveConfig.Covth}" IsEnabled="True"/>
+                                        <Label Content="{DynamicResource CUVTHmV}" VerticalAlignment="Center" Margin="1"  />
+                                        <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveConfig.Cuvth}" IsEnabled="True"/>
+                                        <Label Content="{DynamicResource FOTHC}" VerticalAlignment="Center" Margin="1"  />
+                                        <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveConfig.Foth}" IsEnabled="True"/>
+                                        <Label Content="{DynamicResource FCTHC}" VerticalAlignment="Center" Margin="1"  />
+                                        <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveConfig.Fcth}" IsEnabled="True"/>
+                                        <Button Command="{Binding RunFun}" Content="{DynamicResource send}" Background="#5bc0de"  Margin="3" CommandParameter="3"/>
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <Rectangle Fill="#5bc0de" VerticalAlignment="Top" Height="1" Margin="10,3,10,3"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="{DynamicResource BCNT_A}" VerticalAlignment="Center" Margin="1"  />
+                                        <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveConfig.Bcnt_a}" IsEnabled="True"/>
+                                        <Label Content="{DynamicResource BCNT_B}" VerticalAlignment="Center" Margin="1"  />
+                                        <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveConfig.Bcnt_b}" IsEnabled="True"/>
+                                        <Label Content="{DynamicResource BCNT_C}" VerticalAlignment="Center" Margin="1"  />
+                                        <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveConfig.Bcnt_c}" IsEnabled="True"/>
+                                        <Label Content="{DynamicResource BCNT_D}" VerticalAlignment="Center" Margin="1"  />
+                                        <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveConfig.Bcnt_d}" IsEnabled="True"/>
+                                        <Label Content="{DynamicResource BCNT_E}" VerticalAlignment="Center" Margin="1"  />
+                                        <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveConfig.Bcnt_e}" IsEnabled="True"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="{DynamicResource BCNT_F}" VerticalAlignment="Center" Margin="1"  />
+                                        <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveConfig.Bcnt_f}" IsEnabled="True"/>
+                                        <Label Content="{DynamicResource maxChargeCur}" VerticalAlignment="Center" Margin="1"  />
+                                        <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveConfig.MaxCharge}" IsEnabled="True"/>
+                                        <Button Command="{Binding RunFun}" Content="{DynamicResource send}" Background="#5bc0de"  Margin="3" CommandParameter="4"/>
+                                    </StackPanel>
+                                    <!--<StackPanel>
+                                        <Rectangle Fill="#5bc0de" VerticalAlignment="Top" Height="1" Margin="10,3,10,3"/>
+                                    </StackPanel>-->
+                                    <!--<StackPanel Orientation="Horizontal">
+                                        <Label Content="{DynamicResource traceCode}" VerticalAlignment="Center" Margin="1"  />
+                                        <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveConfig.TraceCode}" Width="1500" IsEnabled="True"/>
+                                        <Button Command="{Binding RunFun}" Content="{DynamicResource send}" Background="#5bc0de"  Margin="3" CommandParameter="5"/>
+                                    </StackPanel>-->
+                                    <!--<StackPanel Orientation="Horizontal">
+                                        <Label Content="Relay2" VerticalAlignment="Center" Margin="1"/>
+                                        -->
+                                    <!--<TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveConfig.TraceCode}" IsEnabled="True"/>-->
+                                    <!--
+                                        <CheckBox x:Name="isRecord" Margin="0,4,0,0" IsChecked="{Binding Gen2SlaveConfig.Realy2}"/>
+                                        <Label Content="CAN_LIFE" VerticalAlignment="Center" Margin="1"/>
+                                        <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveConfig.CanLife}" IsEnabled="True"/>
+                                        <Label Content="{DynamicResource now}" VerticalAlignment="Center" Margin="1"/>
+                                        <Button Command="{Binding RunFun}" Content="{DynamicResource send}" Background="#5bc0de"  Margin="10,3,3,3" CommandParameter="6"/>
+                                    </StackPanel>-->
+                                    <StackPanel>
+                                        <Rectangle Fill="#5bc0de" VerticalAlignment="Top" Height="1" Margin="10,3,10,3"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="{DynamicResource manualjh}" VerticalAlignment="Center" Margin="1" Width="300" HorizontalContentAlignment="Left"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" x:Name="balance" HorizontalAlignment="Left" Height="400"/>
+                                </StackPanel>
+                            </ScrollViewer>
+                        </GroupBox>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="{DynamicResource traceCodeConfig}" Style="{DynamicResource ModelTabItemStyle}"  Visibility="{Binding Itemlist[4]}">
+                    <StackPanel Orientation="Vertical" Margin="0,10,0,0">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{DynamicResource dqTraceCode}" VerticalAlignment="Center" Margin="1" Width="180" />
+                            <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveInfo.TraceCode}" Width="400"/>
+                            <Button x:Name="readTraceCode" Command="{Binding RunFun}" Content="{DynamicResource read2}" Background="#5bc0de"  Margin="10,3,3,3" CommandParameter="7"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{DynamicResource pzTraceCode}" VerticalAlignment="Center" Margin="1" Width="180" />
+                            <TextBox Style="{StaticResource data}" Text="{Binding Gen2SlaveConfig.TraceCode}" Width="400" IsEnabled="True"/>
+                            <Button Command="{Binding RunFun}" Content="{DynamicResource send}" Background="#5bc0de"  Margin="10,3,3,3" CommandParameter="5"/>
+                        </StackPanel>
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+        </Grid>
+    </Grid>
+</mui:ModernWindow>

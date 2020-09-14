@@ -1,0 +1,172 @@
+﻿<mui:ModernWindow x:Class="bms.startup.ToolingMainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+        xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
+                  xmlns:local="clr-namespace:bms.startup.MyStyle"
+                  WindowStartupLocation="CenterScreen"
+        Icon="GXlogo2.ico"
+        WindowState="Maximized"
+        Style="{StaticResource BlankWindow}"
+        Title="HC221.0.0.20200316R"
+        LogoData="F1M59,1C82.109,0.592 131.703,43.981 125,71 121.558,84.874 77.578,126.525 55,122 54.667,121.333 54.333,120.667 54,120 58.921,103.848 97.031,74.05 100,61 99,61 98,61 97,61 90.132,65.02 44.702,84 43,88 43.667,88 44.333,88 45,88 53.175,90.684 57.496,83.374 66,85 66,86.333 66,87.667 66,89 59.699,96.661 54.079,104.134 46,110 44.667,110 43.333,110 42,110 36.632,106.36 33.25,101.709 29,97 28.366,72.076 53.191,15.953 81,28 86.175,30.045 88.245,32.432 89,39 84.447,43.534 81.921,43.13 75,46 76.632,48.557 76.232,48.424 79,50 82.333,50 85.667,50 89,50 91.666,47.667 94.334,45.333 97,43 97.635,28.663 93.71,21.758 84,18 50.145,8.821 26.208,37.04 14,54 9.973,59.595 9.672,65.9 3,69 3,65.334 3,61.666 3,58 11.535,35.345 38.89,12.686 59,1z" 
+        Height="480" Width="720">
+    <Grid>
+        <Grid.RowDefinitions>
+            <!--can卡设置-->
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="240*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="6*" />
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.ColumnSpan="2" Margin="0" Background="#f5f5f5">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{DynamicResource sbsyh}" VerticalAlignment="Center" Style="{StaticResource MyStyle}" Width="160"></TextBlock>
+                    <ComboBox Width="100" ItemsSource="{Binding CanIndexList}" SelectedIndex="{Binding SelectDeviceIndex}"/>
+                    <TextBlock  Text="{DynamicResource cantongdao}" VerticalAlignment="Center" Margin="20,0,0,0" Style="{StaticResource MyStyle}" Width="100"></TextBlock>
+                    <ComboBox Width="100" ItemsSource="{Binding CanChannelList}" SelectedIndex="{Binding SelectCanChannelIndex}"/>
+                    <TextBlock Text="{DynamicResource baudrate}" Margin="20,0,0,0" VerticalAlignment="Center"  Style="{StaticResource MyStyle}" Width="85"></TextBlock>
+                    <ComboBox Width="100" ItemsSource="{Binding CanBaudRateList}" SelectedIndex="{Binding SelectRate}"  DisplayMemberPath="Baudratename"/>
+                    <Button x:Name="CanConnectBtn"  Content="{DynamicResource connect}" Margin="20,0,0,0" Width="85" Command="{Binding ConnectCanCommand}"  CommandParameter="{Binding ElementName=CanConnectBtn}" Style="{DynamicResource ButtonStyle1}" />
+                    <!--<Button Content="{DynamicResource zhuxiao}" Margin="10,0,0,0" Width="60" Command="{Binding LogoutCommand}" Style="{DynamicResource ButtonStyle1}" />-->
+                    <ComboBox x:Name="cbLang" Margin="10,0,0,0"  Width="120" ItemsSource="{Binding CategoryI18nList}" DisplayMemberPath="Name" SelectedIndex="{Binding SelectI18n}" >
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding CbI18nClickCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
+                    <!--<Button x:Name="m_HelpButton" IsEnabled="True" Width="23" Height="23" Command="{Binding UserCommand}" Margin="15,0,0,0" ToolTip="用户管理" Visibility="{Binding ButtonVisible}">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Grid>
+                                    <Ellipse>
+                                        <Ellipse.Stroke>
+                                            <SolidColorBrush x:Name="m_Stroke" Color="Silver" />
+                                        </Ellipse.Stroke>
+                                        <Ellipse.Fill>
+                                            <SolidColorBrush x:Name="m_Back" Color="White" />
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+                                    <Image Margin="2" Source="Images/user.png" />
+                                </Grid>
+
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>-->
+
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" Margin="0" Background="#f5f5f5">
+            <GroupBox Header="{DynamicResource config}" Padding="0,5,0,0">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top"  IsEnabled="{Binding IsConfigEnable}">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                        <Label VerticalAlignment="Center" Content="{DynamicResource no}"></Label>
+                        <TextBox Width="40" Height="25" Margin="5,0,5,0" VerticalAlignment="Center" Text="{Binding General}"></TextBox>
+                        <Label Content="{DynamicResource zdjh}" VerticalAlignment="Center"></Label>
+                    </StackPanel>
+                    <StackPanel Margin="40,0,0,0" VerticalAlignment="Top">
+                        <RadioButton Content="FCT" IsChecked="{Binding IsFCT}" GroupName="FCTorEOL" Command="{Binding RunFun}" CommandParameter="4" IsEnabled="{Binding IsConfigEnable}"/>
+                        <RadioButton Content="EOL" IsChecked="{Binding IsEOL}" GroupName="FCTorEOL" Margin="0,2,0,0" Command="{Binding RunFun}" CommandParameter="4" IsEnabled="{Binding IsConfigEnable}"/>
+                    </StackPanel>
+                    <StackPanel Margin="40,0,0,0" VerticalAlignment="Top" Orientation="Horizontal">
+                        <Label Content="{DynamicResource chuanshu}" Margin="0,4,2,0"/>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                            <RadioButton Content="{DynamicResource standard}" IsChecked="{Binding IsStandard}" GroupName="StandardOrNonStandard" IsEnabled="{Binding IsConfigEnable}"/>
+                            <TextBox Width="40" Margin="5,0,0,0" Height="25" Text="{Binding StandardChuan}"/>
+                        </StackPanel>
+                        <StackPanel Margin="5,0,0,0" VerticalAlignment="Top">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,0">
+                                <RadioButton Content="{DynamicResource 24chuan}" IsChecked="{Binding Is24chuan}" GroupName="StandardOrNonStandard" Margin="0" IsEnabled="{Binding IsConfigEnable}"/>
+                                <Label Content="{DynamicResource module1}" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                <TextBox Width="40" Height="25" Margin="5,0,0,0" Text="{Binding Module1_24chuan}"/>
+                                <Label Content="{DynamicResource module2}" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                <TextBox Width="40"  Height="25" Margin="5,0,0,0" Text="{Binding Module2_24chuan}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
+                                <RadioButton Content="{DynamicResource 36chuan}" IsChecked="{Binding Is36chuan}" GroupName="StandardOrNonStandard" IsEnabled="{Binding IsConfigEnable}"/>
+                                <Label Content="{DynamicResource module1}" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                <TextBox Width="40" Height="25" Margin="5,0,0,0" Text="{Binding Module1_36chuan}"/>
+                                <Label Content="{DynamicResource module2}" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                <TextBox Width="40" Height="25" Margin="5,0,0,0" Text="{Binding Module2_36chuan}"/>
+                                <Label Content="{DynamicResource module3}" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                <TextBox Width="40" Height="25" Margin="5,0,0,0" Text="{Binding Module3_36chuan}"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="80,0,0,0" >
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                            <Label Content="{DynamicResource examiner}" VerticalContentAlignment="Center"/>
+                            <TextBox Width="180" Margin="5,0,0,0" Height="25" Text="{Binding ExaminerNo}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                            <Label Content="{DynamicResource dut}" VerticalContentAlignment="Center"/>
+                            <TextBox Width="180" Margin="5,3,0,0" Height="25" Text="{Binding DutNo}"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <!--<StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="20,0,0,0">
+                        <Label Content="{DynamicResource dut}" VerticalContentAlignment="Center"/>
+                        <TextBox Width="120" Margin="5,0,0,0"/>
+                    </StackPanel>-->
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="1" Margin="0" Background="#f5f5f5">
+            <StackPanel VerticalAlignment="Center">
+                <!--系统状态灯-->
+                <local:ImageButton x:Name="light" IconWidth="80" IconHeight="80" Height="80" Icon="images\greenButton.png" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="1" Grid.RowSpan="3" Margin="5,0,0,0" Background="#f5f5f5">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,40,0,0">
+                <!--<Button Height="80" Width="80" Background="#99CC66" Style="{DynamicResource  RoundedGelButton2}"/>-->
+                <Button Content="{DynamicResource selfcheck}" Height="60" FontSize="23" Width="100" Background="#5bc0de" Command="{Binding RunFun}" CommandParameter="0"/>
+
+                <Button Content="{DynamicResource start}" Height="60" FontSize="23" Width="100" Background="#5bc0de" Margin="0,25,0,0" Command="{Binding RunFun}" CommandParameter="1" IsEnabled="{Binding IsConfigEnable}"/>
+                <Button Content="{DynamicResource reset}" Height="60" FontSize="23" Width="100" Background="#5bc0de" Margin="0,25,0,0" Command="{Binding RunFun}" CommandParameter="2"/>
+                <Button Content="{DynamicResource stop}" Height="60" FontSize="23" Width="100" Background="#5bc0de" Margin="0,25,0,0" Command="{Binding RunFun}" CommandParameter="3"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="0">
+            <StackPanel Orientation="Horizontal" Height="35">
+                <TextBox Width="150" Height="22" Text="{Binding ToolingStepsFilePath}" Margin="15,5,5,5"/>
+                <Button Content="{DynamicResource readfile}" Margin="0,5,5,0" Background="#5bc0de" Command="{Binding ReadToolingStepsFileCommand}"/>
+                <Button Content="testPE" Margin="0,5,5,0" Background="#5bc0de" Command="{Binding RunFun}" CommandParameter="5"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="3" Grid.Column="0">
+            <DataGrid x:Name="showStep" DataContext="{Binding Steps}" ItemsSource="{Binding}" LoadingRow="gdView_LoadingRow"  EnableRowVirtualization ="False"
+                      CanUserDeleteRows="False" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <DataGrid.Columns>
+                    <!--<DataGridTemplateColumn CellTemplate="{StaticResource ResourceKey=cbTemplate}"/>-->
+                    <mui:DataGridCheckBoxColumn Header="{DynamicResource isRun}" Binding="{Binding IsCheck}"/>
+                    <DataGridTextColumn Header="{DynamicResource name}" Binding="{Binding Id}"/>
+                    <DataGridTextColumn Header="{DynamicResource result}" Binding="{Binding Result}"/>
+
+                    <DataGridTextColumn Header="{DynamicResource description}" Binding="{Binding Description}"/>
+                    <!--<DataGridTextColumn Header="{DynamicResource upperLimit}" Binding="{Binding UpperLimit}"/>
+                    <DataGridTextColumn Header="{DynamicResource lowerLimit}" Binding="{Binding LowerLimit}"/>-->
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Grid Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center">
+            <ProgressBar Width="800" Height="10" Minimum="0" Maximum="{Binding Maxpb,Mode=TwoWay}" Value="{Binding PBValue,Mode=TwoWay}"/>
+        </Grid>
+    </Grid>
+    <!--<Window.Resources>
+        <DataTemplate  x:Key="cbTemplate">
+            <Grid>
+                <CheckBox HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding IsCheck,Mode=TwoWay}"/>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>-->
+</mui:ModernWindow>

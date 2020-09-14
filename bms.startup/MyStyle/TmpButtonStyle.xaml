@@ -1,0 +1,57 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+
+
+    <Style x:Key="TmpEnableButton" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Viewbox >
+                        <Grid>
+                            <Path Data="M9.8999632,17.799974L20.5,17.799974 20.5,20.600027 9.8999632,20.600027z M9.8999632,11.599987L20.5,11.599987 20.5,14.400008 9.8999632,14.400008z M9.8999632,5.3999991L20.5,5.3999991 20.5,8.1999898 9.8999632,8.1999898z M2.0000001,0L6.0999754,0 6.0999754,24.400016C7.2999876,25.10003 8.0999754,26.400018 8.0999754,27.90002 8.0999754,30.100034 6.2999876,32 3.9999998,32 1.7999876,32 -1.5787347E-07,30.20001 2.8421709E-14,27.90002 -1.5787347E-07,26.400018 0.79998764,25.10003 2.0000001,24.400016z" 
+                                  Stretch="Uniform" Fill="#5bc0de" Width="20" Height="20" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <TransformGroup.Children>
+                                            <RotateTransform Angle="0" />
+                                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                                        </TransformGroup.Children>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Grid>
+                    </Viewbox>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="TmpDisableButton" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Viewbox >
+                        <Grid>
+                            <Path Data="M9.8999632,17.799974L20.5,17.799974 20.5,20.600027 9.8999632,20.600027z M9.8999632,11.599987L20.5,11.599987 20.5,14.400008 9.8999632,14.400008z M9.8999632,5.3999991L20.5,5.3999991 20.5,8.1999898 9.8999632,8.1999898z M2.0000001,0L6.0999754,0 6.0999754,24.400016C7.2999876,25.10003 8.0999754,26.400018 8.0999754,27.90002 8.0999754,30.100034 6.2999876,32 3.9999998,32 1.7999876,32 -1.5787347E-07,30.20001 2.8421709E-14,27.90002 -1.5787347E-07,26.400018 0.79998764,25.10003 2.0000001,24.400016z" 
+                                  Stretch="Uniform" Fill="Gray" Width="20" Height="20" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <TransformGroup.Children>
+                                            <RotateTransform Angle="0" />
+                                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                                        </TransformGroup.Children>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Grid>
+                    </Viewbox>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+</ResourceDictionary>

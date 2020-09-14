@@ -1,0 +1,76 @@
+﻿<ResourceDictionary  
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
+    xmlns:local="clr-namespace:bms.startup.MyStyle">
+
+    <Style TargetType="{x:Type local:ImageButton}">
+        <!--鼠标形态-->
+        <!--<Setter Property="Cursor" Value="Hand"/>-->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:ImageButton}">
+
+                    <Border Background="{TemplateBinding Background}"  
+                            BorderBrush="{TemplateBinding BorderBrush}"  
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid x:Name="grid" Background="{TemplateBinding Background}">
+                            <Border x:Name="PART_Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}"/>
+
+                            <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
+                                <StackPanel HorizontalAlignment="Center" Orientation="{TemplateBinding IconContentOrientation}" VerticalAlignment="Center" Margin="{TemplateBinding Padding}">
+                                    <Grid HorizontalAlignment="Center" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                        <Image x:Name="PART_Icon" Source="{TemplateBinding Icon}" Height="{TemplateBinding IconHeight}" Width="{TemplateBinding IconWidth}"/>
+                                        <Image x:Name="PART_MouseOverIcon" Visibility="Collapsed" Source="{TemplateBinding IconMouseOver}"  Height="{TemplateBinding IconHeight}" Width="{TemplateBinding IconWidth}"/>
+                                        <Image x:Name="PART_PressIcon" Visibility="Collapsed" Source="{TemplateBinding IconPress}"  Height="{TemplateBinding IconHeight}" Width="{TemplateBinding IconWidth}"/>
+                                    </Grid>
+                                    <TextBlock x:Name="PART_Content" Text="{TemplateBinding Content}"   
+                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"   
+                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"  
+                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"    
+                                               Margin="{TemplateBinding IconContentMargin}"  
+                                               Foreground="{TemplateBinding Foreground}"   
+                                               TextTrimming="CharacterEllipsis"/>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+
+                        <!--鼠标悬浮-->
+                        <!--<Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" TargetName="PART_Content" Value="{Binding MouseOverForeground,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ImageButton}}}"/>
+                            <Setter Property="Background" TargetName="PART_Border" Value="{Binding MouseOverBackground,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ImageButton}}}"/>
+                            <Setter Property="BorderBrush" TargetName="PART_Border" Value="{Binding MouseOverBorderBrush,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ImageButton}}}"/>
+                            <Setter Property="Visibility" TargetName="PART_MouseOverIcon" Value="Visible"/>
+                            <Setter Property="Visibility" TargetName="PART_Icon" Value="Collapsed"/>
+                            <Setter Property="Visibility" TargetName="PART_PressIcon" Value="Collapsed"/>
+                        </Trigger>-->
+                        
+                        <!--鼠标点击-->
+                        <!--<Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Foreground" TargetName="PART_Content" Value="{Binding MouseDownForeground,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ImageButton}}}"/>
+                            <Setter Property="Background" TargetName="PART_Border" Value="{Binding MouseDownBackground,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ImageButton}}}"/>
+                            <Setter Property="BorderBrush" TargetName="PART_Border" Value="{Binding MouseDownBorderBrush,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ImageButton}}}"/>
+                            <Setter Property="Visibility" TargetName="PART_PressIcon" Value="Visible"/>
+                            <Setter Property="Visibility" TargetName="PART_Icon" Value="Collapsed"/>
+                            <Setter Property="Visibility" TargetName="PART_MouseOverIcon" Value="Collapsed"/>
+                        </Trigger>-->
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5" />
+                        </Trigger>
+
+                        <Trigger Property="Text" SourceName="PART_Content" Value="">
+                            <Setter Property="Visibility" TargetName="PART_Content" Value="Collapsed"/>
+                        </Trigger>
+
+                        <Trigger Property="Text" SourceName="PART_Content" Value="{x:Null}">
+                            <Setter Property="Visibility" TargetName="PART_Content" Value="Collapsed"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

@@ -1,0 +1,26 @@
+﻿<Application x:Class="bms.startup.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="Login.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.xaml" />
+                <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.Light.xaml" />
+                <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/Converters.xaml" />
+                <ResourceDictionary Source="/bms.startup;component/MyStyle/SignalButton.xaml" />
+                <ResourceDictionary Source="/bms.startup;component/MyStyle/BatteryButtonStyle.xaml" />
+                <ResourceDictionary Source="/bms.startup;component/MyStyle/TmpButtonStyle.xaml" />
+                <ResourceDictionary Source="/bms.startup;component/MyStyle/GYStyle.xaml" />
+                <ResourceDictionary Source="/bms.startup;component/MyStyle/NormalOrErrorStyle.xaml" />
+                <ResourceDictionary Source="/bms.startup;component/MyStyle/CheckRadioStyle.xaml" />
+                <ResourceDictionary Source="/bms.startup;component/MyStyle/RoundedGelButton.xaml" />
+                <ResourceDictionary Source="/bms.startup;component/MyStyle/ImageButton.xaml" />
+                <ResourceDictionary Source="/bms.startup;component/i18n/English.xaml"/>
+                <ResourceDictionary Source="/bms.startup;component/i18n/Chinese.xaml"/>
+                
+                <!--<ResourceDictionary Source="/bms.startup;component/Style/lableStyle.xaml" />-->
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,364 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{06EFC9EF-0E61-4CC0-B859-D891A06339C3}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>bms.startup</RootNamespace>
+    <AssemblyName>bms.startup</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>GXlogo2.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\lib\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism">
+      <HintPath>..\lib\Microsoft.Practices.Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.94.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="BaudRateModel.cs" />
+    <Compile Include="Command.cs" />
+    <Compile Include="command\balanceAllSelectCommand.cs" />
+    <Compile Include="command\gen2BalanceCommand.cs" />
+    <Compile Include="command\balanceCommand.cs" />
+    <Compile Include="Dictionary.cs" />
+    <Compile Include="Model\ToolingStep.cs" />
+    <Compile Include="Model\ToolingStepsAttr.cs" />
+    <Compile Include="SDK\cyclone_control_api.cs" />
+    <Compile Include="service\ToolingService.cs" />
+    <Compile Include="service\UDSTestService.cs" />
+    <Compile Include="MyStyle\ImageButton.cs" />
+    <Compile Include="ToolingMainWindow.xaml.cs">
+      <DependentUpon>ToolingMainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ToolingViewModel.cs" />
+    <Compile Include="UDSTestMainWindow.xaml.cs">
+      <DependentUpon>UDSTestMainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gen2MainWindow.xaml.cs">
+      <DependentUpon>Gen2MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gen2ViewModel.cs" />
+    <Compile Include="i18n\CategoryInfo.cs" />
+    <Compile Include="Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LoginViewModel.cs" />
+    <Compile Include="Model\BMUConfigModel.cs" />
+    <Compile Include="Model\BMUConfigModel_gy.cs" />
+    <Compile Include="Model\CellModel.cs" />
+    <Compile Include="Model\DefaultValue.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\DiagnoseModel.cs" />
+    <Compile Include="Model\Gen2SlaveConfig.cs" />
+    <Compile Include="Model\Gen2SlaveInfo.cs" />
+    <Compile Include="Model\ResolutionRatioModel.cs" />
+    <Compile Include="Model\SlaveBalanceModel.cs" />
+    <Compile Include="Model\User.cs" />
+    <Compile Include="SDK\CANSDK.cs" />
+    <Compile Include="service\Gen2Service.cs" />
+    <Compile Include="SlaveViewModel.cs" />
+    <Compile Include="UDSTestViewModel.cs" />
+    <Compile Include="userControl\BMUConfig.xaml.cs">
+      <DependentUpon>BMUConfig.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="userControl\BMUConfigViewModel.cs" />
+    <Compile Include="Model\SlavePassivEquilibrium.cs" />
+    <Compile Include="userControl\DelOrUpdate.xaml.cs">
+      <DependentUpon>DelOrUpdate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="util\CsvHelper.cs" />
+    <Compile Include="util\FileUtil.cs" />
+    <Compile Include="util\FunCode.cs" />
+    <Compile Include="util\PasswordBuilder.cs" />
+    <Compile Include="util\ConsoleManager.cs" />
+    <Compile Include="util\DBHelper.cs" />
+    <Compile Include="util\HexCommon.cs" />
+    <Compile Include="util\DataConverter.cs" />
+    <Compile Include="util\Serializer.cs" />
+    <Compile Include="util\MyVisualTreeHelper.cs" />
+    <Compile Include="util\SqLiteHelper.cs" />
+    <Compile Include="util\Test.cs" />
+    <Compile Include="Windows\AddBMUForm.xaml.cs">
+      <DependentUpon>AddBMUForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\AddUser.xaml.cs">
+      <DependentUpon>AddUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\AddUserViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Windows\DiagnoseForm.xaml.cs">
+      <DependentUpon>DiagnoseForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\DiagnoseViewModel.cs" />
+    <Compile Include="Windows\ReadCfgForm.xaml.cs">
+      <DependentUpon>ReadCfgForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ReadCfgViewModel.cs" />
+    <Page Include="MyStyle\ImageButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MyStyle\RoundedGelButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ToolingMainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UDSTestMainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gen2MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="i18n\Chinese.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="i18n\English.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="MyStyle\BatteryButtonStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MyStyle\CheckRadioStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MyStyle\lableStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MyStyle\NormalOrErrorStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MyStyle\SignalButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MyStyle\TmpButtonStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MyStyle\GYStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="userControl\BMUConfig.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="userControl\DelOrUpdate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\AddBMUForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\AddUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\DiagnoseForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ReadCfgForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="File\FCT1.gy">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="File\MPC5746rFlashDriver.srec" />
+    <None Include="File\S32K144_ActiveBalance64Pin_4.16_2.srec">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="File\S32K144_ActiveBalance64Pin_4.16_3.srec">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="File\S32K144_ActiveBalance64Pin_4.16_4.srec">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="File\S32K144_Bootloader_v2_0.srec">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Properties\app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FirstFloor.ModernUI\FirstFloor.ModernUI.csproj">
+      <Project>{a0ea4572-2726-4585-8e17-3a81a0eafa61}</Project>
+      <Name>FirstFloor.ModernUI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gotion.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Config\Config.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\user.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="GXlogo2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\greenButton.png" />
+    <Resource Include="images\redButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Config\ToolingAttr.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="File\FCT2.gy">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="File\FileSave.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\yellowButton.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

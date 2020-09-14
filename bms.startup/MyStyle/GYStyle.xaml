@@ -1,0 +1,27 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    <Style TargetType="{x:Type Label}" x:Key="label_gy">
+        <Setter Property="Width" Value="115"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="HorizontalContentAlignment" Value="Right"></Setter>
+    </Style>
+    <Style TargetType="{x:Type TextBox}" x:Key="data">
+        <Setter Property="Width" Value="80"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+        <Setter Property="Margin" Value="3"/>
+    </Style>
+    <Style x:Key="infoNum" TargetType="{x:Type Label}">
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="Width" Value="45"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+    <Style x:Key="receiveData" TargetType="{x:Type TextBox}" BasedOn="{StaticResource data}">
+        <Setter Property="Margin" Value="3"/>
+        <Setter Property="IsEnabled" Value="False"/>
+    </Style>
+
+</ResourceDictionary>

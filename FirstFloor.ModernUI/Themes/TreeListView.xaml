@@ -1,0 +1,96 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:FirstFloor.ModernUI.Windows.Controls">
+
+    <controls:TreeListViewConverter x:Key="TreeListViewConverter"/>
+    <ControlTemplate TargetType="TreeViewItem" x:Key="TreeListViewItem">
+        <StackPanel>
+            <Border x:Name="Border">
+                <GridViewRowPresenter Content="{TemplateBinding Header}"
+                    Columns="{Binding Columns, 
+                    RelativeSource={RelativeSource Mode=FindAncestor, 
+                    AncestorType=controls:TreeListView}}"/>
+            </Border>
+            <ItemsPresenter x:Name="ItemsPresenter" Visibility="Collapsed"/>
+        </StackPanel>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsExpanded" Value="True">
+                <Setter TargetName="ItemsPresenter" Property="Visibility" Value="Visible"/>
+            </Trigger>
+            <Trigger Property="IsSelected" Value="true">
+                 <!--选中以后背景设置-->
+                <!--<Setter TargetName="Border" Property="Background"
+                    Value="{DynamicResource ItemBackgroundSelected}"/>-->
+                <Setter Property="Foreground" 
+                   Value="{DynamicResource ItemBackgroundSelected}"/>
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsSelected" Value="true"/>
+                    <Condition Property="IsSelectionActive" Value="false"/>
+                </MultiTrigger.Conditions>
+                <Setter TargetName="Border" Property="Background"
+                    Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+                <Setter Property="Foreground" 
+                    Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            </MultiTrigger>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="Foreground" 
+                    Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate TargetType="{x:Type controls:TreeListViewExpander}" x:Key="TreeListViewExpander">
+        <StackPanel Orientation="Horizontal" x:Name="ContainerElement">
+            <FrameworkElement Width="{Binding RelativeSource={x:Static RelativeSource.Self}, 
+                Converter={StaticResource TreeListViewConverter}}"/>
+            <ToggleButton IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource Mode=FindAncestor,
+                AncestorType=TreeViewItem}}" Width="9" Height="9" VerticalAlignment="Center" Margin="1"/>
+        </StackPanel>
+        <ControlTemplate.Triggers>
+            <DataTrigger Binding="{Binding HasItems, RelativeSource={RelativeSource Mode=FindAncestor,
+                AncestorType=TreeViewItem}}" Value="False">
+                <Setter TargetName="ContainerElement" Property="Visibility" Value="Hidden"/>
+            </DataTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style TargetType="{x:Type controls:TreeListView}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:TreeListView}">
+                    <ControlTemplate.Resources>
+                        <Style TargetType="TreeViewItem">
+                            <Setter Property="Template" Value="{StaticResource TreeListViewItem}"/>
+                        </Style>
+                        <Style TargetType="controls:TreeListViewExpander">
+                            <Setter Property="Template" Value="{StaticResource TreeListViewExpander}"/>
+                        </Style>
+                    </ControlTemplate.Resources>
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                      VerticalScrollBarVisibility="Disabled">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <GridViewHeaderRowPresenter Columns="{TemplateBinding Columns}"
+                                    AllowsColumnReorder="{TemplateBinding AllowsColumnReorder}"/>
+                                <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                              VerticalScrollBarVisibility="Auto"
+                                              Grid.Row="1">
+                                    <ItemsPresenter/>
+                                </ScrollViewer>
+                            </Grid>
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

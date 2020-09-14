@@ -1,0 +1,241 @@
+﻿<mui:ModernWindow x:Class="bms.startup.Windows.DiagnoseForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+                  xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                  WindowStartupLocation="CenterScreen"
+                  Style="{StaticResource BlankWindow}"
+                  ResizeMode="CanResize"
+                  Title="电压诊断" Height="550" Width="1100">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closed">
+            <i:InvokeCommandAction Command="{Binding DiagnoseClosedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="13"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="TextAlignment" Value="Right"/>
+        </Style>
+    </Window.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <StackPanel x:Name="parent">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="系统电源频率:"/>
+                <TextBox Text="{Binding Diagnose.MON_PWM_SWP}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="系统电源占空比:"/>
+                <TextBox Text="{Binding  Diagnose.MON_PWM_SWP_Fre}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="均衡电源电压:"/>
+                <TextBox Text="{Binding Diagnose.MON_VB_24V}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="系统电源电压:"/>
+                <TextBox  Text="{Binding Diagnose.MON_VS_24V}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="均衡电源使能诊断:"/>
+                <TextBox Text="{Binding Diagnose.MON_EN_VB_24V}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="系统电源使能诊断:"/>
+                <TextBox Text="{Binding Diagnose.MON_EN_POWER}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="低压12V:"/>
+                <TextBox Text="{Binding Diagnose.MON_12VL}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="低压2.5V基准:"/>
+                <TextBox Text="{Binding Diagnose.MON_Vref_25VL}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="低压1.47V基准:"/>
+                <TextBox Text="{Binding Diagnose.MON_Vref_147VL}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="低压3.53V基准:"/>
+                <TextBox Text="{Binding  Diagnose.MON_Vref_353VL}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="板内环境温度:"/>
+                <TextBox Text="{Binding Diagnose.MON_T_AMB}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="原边均衡电流_0:"/>
+                <TextBox Text="{Binding Diagnose.MON_ABC_PRI_0}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="原边MOS温度_0:"/>
+                <TextBox Text="{Binding Diagnose.MON_T_PRI_0}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="高压5V_0:"/>
+                <TextBox Text="{Binding Diagnose.MON_5VH_1428}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="高压12V_0:"/>
+                <TextBox Text="{Binding Diagnose.MON_12VH}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="高压0.3V基准_0:"/>
+                <TextBox Text="{Binding Diagnose.MON_Vref_03VH}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="高压4.7V基准_0:"/>
+                <TextBox Text="{Binding Diagnose.MON_Vref_47VH}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+            </StackPanel>
+            <!--Dia5-->
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="副边均衡电流_0:"/>
+                <TextBox Text="{Binding Diagnose.MON_ABC_SEC}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="副边均衡电压_0:"/>
+                <TextBox Text="{Binding Diagnose.MON_ABV}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="温感基准电压_0:"/>
+                <TextBox Text="{Binding Diagnose.MON_VREF2}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="均衡电流设置电压_0:"/>
+                <TextBox Text="{Binding Diagnose.MON_VSET}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="副边MOS温度_0:"/>
+                <TextBox Text="{Binding Diagnose.MON_T_SEC}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="单体总压_0:"/>
+                <TextBox Text="{Binding Diagnose.MON_TV_Cell}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="1428报错_0:"/>
+                <TextBox Text="{Binding Diagnose.MON_FAULT_INT_1428}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="模组开关频率_0:"/>
+                <TextBox Text="{Binding Diagnose.MON_GATE_LS_0}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="模组开关占空比_0:"/>
+                <TextBox Text="{Binding Diagnose.MON_GATE_LS_0_Fre}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+            </StackPanel>
+           
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="原边均衡电流_1:"/>
+                <TextBox Text="{Binding Diagnose.MON_ABC_PRI_1}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="原边MOS温度_1:"/>
+                <TextBox Text="{Binding Diagnose.MON_T_PRI_1}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="高压5V_1:"/>
+                <TextBox Text="{Binding Diagnose.MON_5VH_1428_1}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="高压12V_1:"/>
+                <TextBox Text="{Binding Diagnose.MON_12VH1}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+            </StackPanel>
+            <!--Dia8-->
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="高压0.3V基准_1:"/>
+                <TextBox Text="{Binding Diagnose.MON_Vref_03VH1}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="高压4.7V基准_1:"/>
+                <TextBox Text="{Binding Diagnose.MON_Vref_47VH1}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="副边均衡电流_1:"/>
+                <TextBox Text="{Binding Diagnose.MON_ABC_SEC_1}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="副边均衡电压_1:"/>
+                <TextBox Text="{Binding Diagnose.MON_ABV_1}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+            </StackPanel>
+            <!--Dia9-->
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="温感基准电压_1:"/>
+                <TextBox Text="{Binding Diagnose.MON_VREF2_1}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="均衡电流设置电压_1:"/>
+                <TextBox Text="{Binding Diagnose.MON_VSET_1}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="副边MOS温度_1:"/>
+                <TextBox Text="{Binding Diagnose.MON_T_SEC_1 }"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="单体总压_1"/>
+                <TextBox Text="{Binding Diagnose.MON_TV_Cell_1}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+            </StackPanel>
+            <!--Dia10-->
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="1428报错_1:"/>
+                <TextBox Text="{Binding Diagnose.MON_FAULT_INT_1428_1}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="模组开关频率_1:"/>
+                <TextBox Text="{Binding Diagnose.MON_GATE_LS_1}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="模组开关占空比_1:"/>
+                <TextBox Text="{Binding Diagnose.MON_GATE_LS_1_Fre}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="原边均衡电流_2:"/>
+                <TextBox Text="{Binding Diagnose.MON_ABC_PRI_2}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="原边MOS温度_2:"/>
+                <TextBox Text="{Binding Diagnose.MON_T_PRI_2}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+            </StackPanel>
+            <!--Dia11-->
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="高压5V_2:"/>
+                <TextBox Text="{Binding Diagnose.MON_5VH_1428_2}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="高压12V_2:"/>
+                <TextBox Text="{Binding Diagnose.MON_12VH2}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="高压0.3V基准_2:"/>
+                <TextBox Text="{Binding Diagnose.MON_Vref_03VH2}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="高压4.7V基准_2:"/>
+                <TextBox Text="{Binding Diagnose.MON_Vref_47VH2}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+            </StackPanel>
+            <!--Dia12-->
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="副边均衡电流_2:"/>
+                <TextBox Text="{Binding Diagnose.MON_ABC_SEC_2}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <!--<TextBox Text="{Binding Diagnose.MON_Vref_47VH2}"/>-->
+                <TextBlock Text="副边均衡电压_2:"/>
+                <TextBox Text="{Binding Diagnose.MON_ABV_2}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="温感基准电压_2:"/>
+                <TextBox Text="{Binding Diagnose.MON_VREF2_2}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="均衡电流设置电压_2:"/>
+                <TextBox Text="{Binding Diagnose.MON_VSET_2}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+            </StackPanel>
+            <!--Dia13-->
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="副边MOS温度_2:"/>
+                <TextBox Text="{Binding Diagnose.MON_T_SEC_2}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="单体总压_2:"/>
+                <TextBox Text="{Binding Diagnose.MON_TV_Cell_2}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="1428报错_2:"/>
+                <TextBox Text="{Binding Diagnose.MON_FAULT_INT_1428_2}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="模组开关频率_2:"/>
+                <TextBox Text="{Binding Diagnose.MON_GATE_LS_2}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+                <TextBlock Text="模组开关占空比_2:"/>
+                <TextBox Text="{Binding Diagnose.MON_GATE_LS_2_Fre}"/>
+                <Button Style="{StaticResource SignalDisableButton}"/>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</mui:ModernWindow>

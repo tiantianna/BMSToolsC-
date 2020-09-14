@@ -1,0 +1,148 @@
+﻿<mui:ModernWindow x:Class="bms.startup.UDSTestMainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+        xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
+        WindowStartupLocation="CenterScreen"
+        Icon="./GXlogo2.ico"
+        WindowState="Maximized"
+        Style="{StaticResource BlankWindow}"
+ 
+        Title="HC221.0.0.20200316R"
+        LogoData="F1M59,1C82.109,0.592 131.703,43.981 125,71 121.558,84.874 77.578,126.525 55,122 54.667,121.333 54.333,120.667 54,120 58.921,103.848 97.031,74.05 100,61 99,61 98,61 97,61 90.132,65.02 44.702,84 43,88 43.667,88 44.333,88 45,88 53.175,90.684 57.496,83.374 66,85 66,86.333 66,87.667 66,89 59.699,96.661 54.079,104.134 46,110 44.667,110 43.333,110 42,110 36.632,106.36 33.25,101.709 29,97 28.366,72.076 53.191,15.953 81,28 86.175,30.045 88.245,32.432 89,39 84.447,43.534 81.921,43.13 75,46 76.632,48.557 76.232,48.424 79,50 82.333,50 85.667,50 89,50 91.666,47.667 94.334,45.333 97,43 97.635,28.663 93.71,21.758 84,18 50.145,8.821 26.208,37.04 14,54 9.973,59.595 9.672,65.9 3,69 3,65.334 3,61.666 3,58 11.535,35.345 38.89,12.686 59,1z" 
+        Height="480" Width="720">
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBox}" x:Key="data">
+            <Setter Property="Width" Value="70"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="IsEnabled" Value="False"/>
+        </Style>
+        <!--<Style TargetType="{x:Type Label}">
+            <Setter Property="Width" Value="140"/>
+            -->
+        <!--<Setter Property="Width" Value="150"/>-->
+        <!--
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="HorizontalContentAlignment" Value="Right"></Setter>
+        </Style>-->
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="5,5,5.333,5.333">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{DynamicResource sbsyh}" VerticalAlignment="Center" Style="{StaticResource MyStyle}" Width="160"></TextBlock>
+                    <ComboBox Width="100" ItemsSource="{Binding CanIndexList}" SelectedIndex="{Binding SelectDeviceIndex}"/>
+                    <TextBlock  Text="{DynamicResource cantongdao}" VerticalAlignment="Center" Margin="20,0,0,0" Style="{StaticResource MyStyle}" Width="100"></TextBlock>
+                    <ComboBox Width="100" ItemsSource="{Binding CanChannelList}" SelectedIndex="{Binding SelectCanChannelIndex}"/>
+                    <TextBlock Text="{DynamicResource baudrate}" Margin="20,0,0,0" VerticalAlignment="Center"  Style="{StaticResource MyStyle}" Width="85"></TextBlock>
+                    <ComboBox Width="100" ItemsSource="{Binding CanBaudRateList}" SelectedIndex="{Binding SelectRate}"  DisplayMemberPath="Baudratename"/>
+                    <Button x:Name="CanConnectBtn"  Content="{DynamicResource connect}" Margin="20,0,0,0" Width="85" Command="{Binding ConnectCanCommand}"  CommandParameter="{Binding ElementName=CanConnectBtn}" Style="{DynamicResource ButtonStyle1}" />
+                    <!--<Button Content="{DynamicResource zhuxiao}" Margin="10,0,0,0" Width="60" Command="{Binding LogoutCommand}" Style="{DynamicResource ButtonStyle1}" />-->
+                    <ComboBox x:Name="cbLang" Margin="10,0,0,0"  Width="120" ItemsSource="{Binding CategoryI18nList}" DisplayMemberPath="Name" SelectedIndex="{Binding SelectI18n}" >
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding CbI18nClickCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="5,5,5.333,5.333">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <!-- SID下拉列表 -->
+                    <Label Content="SID:" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="sidComboxBox" Margin="10" Height="30" Width="50" SelectedIndex="0"></ComboBox>
+                    <!-- 子功能码下拉列表 -->
+                    <Label Content="{DynamicResource subfunctionCode}" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="didComboxBox" Height="30" Canvas.Left="80" Margin="10" Canvas.Top="10" Width="50" SelectedIndex="0"></ComboBox>
+                    <Label Content="DID:" VerticalAlignment="Center"/>
+                    <TextBox Width="80" Height="30" Margin="5,0,0,0" Text="{Binding Did}"/>
+                    <!--CommunicationType下拉列表 -->
+                    <!--
+                    <Label Content="CommunicationType" VerticalAlignment="Center" Visibility="Collapsed"/>
+                    <ComboBox x:Name="CTComboxBox" Height="30" Canvas.Left="80" Margin="10" Canvas.Top="10" Width="50" SelectedIndex="0" Visibility="Collapsed"></ComboBox>-->
+
+                    <Label Content="{DynamicResource sendID}" VerticalContentAlignment="Center" Margin="5"/>
+                    <TextBox Width="80" Height="30" Text="{Binding SendID}"/>
+                    <Label Content="{DynamicResource receiveID}" VerticalContentAlignment="Center" Margin="5"/>
+                    <TextBox Width="80" Height="30" Text="{Binding ReceiveID}"/>
+                    <Label Content="输入22数据" VerticalContentAlignment="Center" Margin="20,5,5,5"/>
+                    <TextBox Width="200" Height="30" Text="{Binding Data22}"/>
+
+
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <!--<TextBlock Width="700" Height="80" Text="{Binding LeftFrame}"/>-->
+
+                    <TextBox  TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Width="500" Height="40" Text="{Binding LeftFrame}"/>
+                    <Button Content="{DynamicResource add}" Command="{Binding RunFun}" CommandParameter="8" VerticalAlignment="Bottom" Height="30" Margin="10,0,0,0" Width="60" Style="{DynamicResource ButtonStyle1}" />
+                    <Button x:Name="send" Content="{DynamicResource send}" Command="{Binding RunFun}" CommandParameter="0" VerticalAlignment="Bottom" Height="30" Margin="10,0,0,0" Width="60" Style="{DynamicResource ButtonStyle1}" />
+                    <Button Content="test（去1003）" Command="{Binding RunFun}" CommandParameter="5" VerticalAlignment="Bottom" Height="30" Margin="10,0,0,0" Width="120" Style="{DynamicResource ButtonStyle1}" />
+                    <Label Content="间隔时间" Margin="20,0,0,0" Height="30" VerticalAlignment="Bottom"/>
+                    <TextBox Width="50" Height="30" Text="{Binding Ter}" VerticalAlignment="Bottom"/>
+                    <Button Content="test（多次31）" Command="{Binding RunFun}" CommandParameter="6" VerticalAlignment="Bottom" Height="30" Margin="10,0,0,0" Width="120" Style="{DynamicResource ButtonStyle1}" />
+
+                    <!--<Button x:Name="sendHeart" Content="{DynamicResource sendHeart}" Command="{Binding RunFun}" CommandParameter="2" VerticalAlignment="Bottom" Height="30" Margin="10,0,0,0" Width="60" Style="{DynamicResource ButtonStyle1}" />-->
+                </StackPanel>
+                <StackPanel Margin="0,10,0,0" HorizontalAlignment="Left" Orientation="Horizontal">
+                    <TextBox TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Width="500" Height="80" Text="{Binding Combin}"/>
+                    <Button Content="{DynamicResource cleanScreen}" Command="{Binding RunFun}" CommandParameter="9" VerticalAlignment="Bottom" Height="30" Margin="10,0,0,0" Width="60" Style="{DynamicResource ButtonStyle1}" />
+                </StackPanel>
+                <!--<StackPanel Orientation="Horizontal" >
+                </StackPanel>-->
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <RichTextBox FontFamily="宋体" FontSize="16" VerticalScrollBarVisibility="Auto" Width="800" Height="220" x:Name="rtb">
+                        <FlowDocument>
+                            <Paragraph x:Name="showUdsLog">
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <Button Content="{DynamicResource cleanScreen}"  Command="{Binding RunFun}" CommandParameter="1" Margin="20,10,0,5" Height="30" Width="60" Style="{DynamicResource ButtonStyle1}"/>
+
+                </StackPanel>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Width="300" Height="22" Text="{Binding FillingFile}" Margin="0,0,0,10"/>
+                        <Button Content="读取文件" Margin="5" Command="{Binding RunFun}" CommandParameter="10" Style="{DynamicResource ButtonStyle1}" Height="30" Width="60"/>
+                        <Button Content="文件填充" Margin="5" Command="{Binding RunFun}" CommandParameter="11" Height="30" Width="60" Style="{DynamicResource ButtonStyle1}"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2" Margin="5,5,5.333,5.333">
+            <GroupBox Header="{DynamicResource downbootloader}" Padding="0,5,0,0">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Width="300" Height="22" Text="{Binding AppFile}" Margin="0,0,0,10"/>
+                        <Button Content="读取文件" Margin="5" Command="{Binding RunFun}" CommandParameter="3" Style="{DynamicResource ButtonStyle1}" Height="30" Width="60"/>
+                        <Button Content="文件转换" Margin="5" IsEnabled="{Binding Masterbootisenable}" Command="{Binding RunFun}" CommandParameter="7" Height="30" Width="60" Style="{DynamicResource ButtonStyle1}"/>
+                        <Button Content="下载" Margin="5" IsEnabled="{Binding Masterbootisenable}" Command="{Binding RunFun}" CommandParameter="4" Height="30" Width="45" Style="{DynamicResource ButtonStyle1}"/>
+                        <Label Content="是否填充FF" VerticalContentAlignment="Center" Margin="10,0,0,0"/>
+                        <CheckBox IsChecked="{Binding HexOrSrec}"/>
+                        
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <ProgressBar HorizontalAlignment="Center" Orientation="Horizontal" Width="800" Height="12" Minimum="0" Maximum="{Binding Maxpb,Mode=TwoWay}" Value="{Binding PBValue,Mode=TwoWay}"/>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+        <Grid Grid.Row="3" Margin="5,5,5.333,5.333" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <TextBlock x:Name="Info" Text="{Binding Info}" Foreground="Red"/>
+        </Grid>
+    </Grid>
+</mui:ModernWindow>

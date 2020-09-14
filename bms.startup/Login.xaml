@@ -1,0 +1,42 @@
+﻿<mui:ModernWindow x:Class="bms.startup.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+        WindowStartupLocation="CenterScreen"
+        Icon="GXlogo2.ico"
+        x:Name="window"
+        ResizeMode="NoResize"
+        Style="{StaticResource BlankWindow}"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        LogoData="F1M59,1C82.109,0.592 131.703,43.981 125,71 121.558,84.874 77.578,126.525 55,122 54.667,121.333 54.333,120.667 54,120 58.921,103.848 97.031,74.05 100,61 99,61 98,61 97,61 90.132,65.02 44.702,84 43,88 43.667,88 44.333,88 45,88 53.175,90.684 57.496,83.374 66,85 66,86.333 66,87.667 66,89 59.699,96.661 54.079,104.134 46,110 44.667,110 43.333,110 42,110 36.632,106.36 33.25,101.709 29,97 28.366,72.076 53.191,15.953 81,28 86.175,30.045 88.245,32.432 89,39 84.447,43.534 81.921,43.13 75,46 76.632,48.557 76.232,48.424 79,50 82.333,50 85.667,50 89,50 91.666,47.667 94.334,45.333 97,43 97.635,28.663 93.71,21.758 84,18 50.145,8.821 26.208,37.04 14,54 9.973,59.595 9.672,65.9 3,69 3,65.334 3,61.666 3,58 11.535,35.345 38.89,12.686 59,1z" 
+        Title="HC221.0.0.20200316R_测试版_4.11" Height="300" Width="300" >
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoginKeyDownCommand}" CommandParameter="{Binding ElementName=window}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Grid>
+        <StackPanel>
+            <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="5">
+                <Label Content="用户名：" VerticalContentAlignment="Center" Width="60"/>
+                <TextBox x:Name="username" Width="200" VerticalContentAlignment="Center" Text="{Binding Username}" />
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="5">
+                <Label Content="密码：" VerticalContentAlignment="Center" Width="60" />
+                <TextBox Width="200" VerticalContentAlignment="Center" Text="{Binding  Passwd,Mode=TwoWay}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                <RadioButton IsChecked="{Binding IsGen2}">二代</RadioButton>
+                <RadioButton Margin="10 5 5 5" IsChecked="{Binding IsGen3}">三代</RadioButton>
+                <RadioButton Margin="10 5 5 5" IsChecked="{Binding IsUDS}">UDS</RadioButton>
+                <RadioButton Margin="10 5 5 5" IsChecked="{Binding IsTooling}">工装</RadioButton>
+            </StackPanel>
+            <StackPanel>
+                <Button x:Name="loginbtn" Content="登录" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName= window}"/>
+            </StackPanel>
+            
+        </StackPanel>
+    </Grid>
+</mui:ModernWindow>
